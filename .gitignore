@@ -1,0 +1,11 @@
+.idea/
+node_modules/
+public/styles
+steps.txt
+npm-debug.log
+.sass-cache/
+atlassian-ide-plugin.xml
+git stash.txt
+public/fontello/__fontello_fonts/
+refs.txt
+referencefolders

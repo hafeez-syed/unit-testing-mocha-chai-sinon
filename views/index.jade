@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+   head
+      title= pageTitle
+      link(rel='stylesheet', href='fontello/css/fontello.css')
+      link(rel='stylesheet', href='styles/style.css')
+      script(type='text/javascript' src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+      script(type='text/javascript' src='//wurfl.io/wurfl.js')
+   body
+    h1= pageTitle
+    each palette in paletteBox
+     div.box
+      p=palette.font
+      span(class=palette.font)
+      span.seperator | #{palette.code}
+   script(src= liveReloadScript)
+   script(type='text/javascript' src='scripts/device_detection.js')

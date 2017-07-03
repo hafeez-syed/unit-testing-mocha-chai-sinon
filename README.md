@@ -1,2 +1,1 @@
-# unit-testing-mocha-chai-sinon
-JavaScript Unit Testing with Mocha, Chai and Sinon
+JavaScript Unit Testing with Mocha, Chai And Sinon

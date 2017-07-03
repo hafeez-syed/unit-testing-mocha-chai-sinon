@@ -1,0 +1,26 @@
+{
+    "eqeqeq": true,
+    "curly": true,
+    "indent": 2,
+    "undef": true,
+    "unused": true,
+    "node": true,
+    "camelcase": false,
+    "asi": true,
+    "quotmark": "single",
+    "laxcomma": true
+}
+
+/*
+{
+    eqeqeq: true, // must use '===' when comparing
+    curly: true, // must use '{' '}' when using loops or conditions
+    indent: 2, // indent upto 2 tabs
+    undef: true, // must use 'var' keyword
+    unused: true, // remove unused variables
+    node: true, // or {devel: true} will accept console.log
+    camelcase: true, // force variables to use camelCase style
+    asi: true, // ignore missing semicolon warnings
+    quotmark: "single" // use single quotes '' only
+}
+*/

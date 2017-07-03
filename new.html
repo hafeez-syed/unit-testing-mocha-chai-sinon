@@ -1,0 +1,62 @@
+<html>
+<body>
+<h3>Modini - MPM Driver</h3>
+<form id="smartControlForm" action="http://localhost:8080/web/guest/mpm" method="POST">
+    UserId <input id="customerId" type="text" name="UserId" value="000333" /><br/>
+    Username<input id="customerId" type="text" name="Username" value="000333"/><br/>
+    CustomerId <input id="customerId" type="text" name="CustomerId" value="111222333"/><br/>
+    UserRole <input id="userRole" type="text" name="UserRole" value="FULL_AUTHORITY"/><br/>
+    MSISDN <input id="MSISDN" type="text" name="MSISDN" value="0400111222"/><br/>
+    PrefContactEmail <input id="prefContactEmail" type="text" name="PrefContactEmail" value="neo@matrix.com"/><br/>
+    PrefContactMobile <input id="prefContactMobile" type="text" name="PrefContactMobile" value="0400111222"/><br/>
+    Name <input id="name" type="text" name="Name" value="Test User"/><br/>
+    CheckSum <input id="checkSum" type="text" name="CheckSum" value=""/><br/>
+    IsLegacy<input id="IsLegacy" type="text" name="IsLegacy" value="true"/><br/>
+    <input id="source" type="hidden" name="Source" value="MODINI"/><br/>
+    <input id="device" type="hidden" name="Device" value=""/><br/>
+    <input id="os" type="hidden" name="Os" value=""/><br/>
+    <input type="submit" value="Submit" />
+</form>
+<!-- Begin Device detection -->
+<script type="text/javascript" src="http://wurfl.io/wurfl.js"></script>
+<!-- End Device detection -->
+
+<!-- Begin checking WURFL object -->
+<script type="text/javascript">
+    var getDevice = function() {
+        return WURFL.form_factor;
+    }
+
+    function getMobileOperatingSystem() {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+        if( userAgent.match( /iPad/i ) || userAgent.match( /iPhone/i ) || userAgent.match( /iPod/i ) )
+        {
+            return 'iOS';
+
+        }
+        else if( userAgent.match( /Android/i ) )
+        {
+
+            return 'Android';
+        }
+        else
+        {
+            var OSName="Unknown OS";
+            if (navigator.appVersion.indexOf("Win")!=-1) OSName="Windows";
+            if (navigator.appVersion.indexOf("Mac")!=-1) OSName="MacOS";
+            if (navigator.appVersion.indexOf("X11")!=-1) OSName="UNIX";
+            if (navigator.appVersion.indexOf("Linux")!=-1) OSName="Linux";
+
+            return OSName;
+        }
+    }
+
+
+    document.getElementById('device').value = getDevice();
+    document.getElementById('os').value = getMobileOperatingSystem();
+    console.log(WURFL.form_factor);
+</script>
+<!-- End checking WURFL object -->
+</body>
+</html>

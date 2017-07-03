@@ -1,0 +1,11 @@
+@import 'globals'
+
+=background-mixin($device)
+  @if $device == "Desktop"
+    background-color: $globalBgColor
+    color: $globalFontColor
+  @else
+    background-color: $globalBgColorMobile
+    color: $globalFontColorMobile
+  margin: 10px
+  width: 100%
