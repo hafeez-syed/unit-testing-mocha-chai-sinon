@@ -3,13 +3,17 @@
  */
 module.exports = {
     convert: function (hex, callback) {
-        if (/^#/.test(hex)) {
-            hex = hex.slice(1);
-        }
-        var invalid = this.isInvalid(hex);
-        if (invalid) {return callback(new Error(invalid.reason));}
-        var values = this.arrayify(hex);
-        return this.parse(values);
+        setTimeout(function() {
+            if (/^#/.test(hex)) {
+                hex = hex.slice(1);
+            }
+            var invalid = this.isInvalid(hex);
+            if (invalid) {
+                return callback(new Error(invalid.reason));
+            }
+            var values = this.arrayify(hex);
+            callback(null, this.parse(values));
+        }.bind(this), 50);
     },
     arrayify: function (hex) {
         var values = hex.split('');
