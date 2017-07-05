@@ -2,7 +2,7 @@
  * Created by Hafeez on 1/21/2015.
  */
 module.exports = function (hex, callback) {
-
+    console.log('hey HEX: callback from hell', hex);
     setTimeout(function() {
         if (/^#/.test(hex)) {
             hex = hex.slice(1);

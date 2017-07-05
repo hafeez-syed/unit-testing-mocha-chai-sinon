@@ -11,17 +11,32 @@ describe('hex2rgb_chai-expect', function() {
 
     describe('convert method', function () {
 
-        it("should call parse once", function(done) {
+        it("SINON.SPY: should call parse once", function(done) {
 
             sinon.spy(hex2rgb2, 'parse');
 
             hex2rgb2.convert('#ffffff', function (err, result) {
                 expect(hex2rgb2.parse.calledOnce).to.be.true;
                 expect(hex2rgb2.parse.args[0][0]).to.have.length(6);
+
+                hex2rgb2.parse.restore(); // undo spy
+
                 done();
             });
         });
 
+        it("SINON.STUB: should always return parse result", function(done) {
+            sinon.stub(hex2rgb2, 'arrayItems').returns([0,0,300]);
+
+            hex2rgb2.convert('123', function (err, result) {
+                expect(result).to.deep.equal([0,0, 300]);
+ 
+                hex2rgb2.arrayItems.restore(); // undo stub
+                done();
+            });
+            
+        });
+        
         it("should throw an error if the value is not an hex code", function(done) {
             hex2rgb("blue", function(error, result){
                 expect(error).to.exist;
