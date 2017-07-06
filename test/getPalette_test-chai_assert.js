@@ -7,12 +7,21 @@ var palette = require('../modules/palette')
 , configFile = configFilePath + 'colorPalette.json'
 , jsonContentFile = configFilePath + 'jsonContent.json'
 , writeContentFile = function(config, callback) {
-    fs.writeFile(jsonContentFile, JSON.stringify(config))
-  }
+    if(Array.isArray(config)) {
+        fs.writeFile(jsonContentFile, JSON.stringify(config), function (err) {
+            if(err) {
+                callback({type: 'error', 'message': err.message});
+            }
+
+            callback({type: 'success', 'message': 'The file has been saved!'});
+        });
+    } else {
+        callback({type: 'error', 'message': 'Value passed is not an array'});
+    }
+};
 
 describe('getPalette_chai-assert', function() {
-
-    var config = {}
+    var config = {};
 
     before(function(done){
 
@@ -23,23 +32,27 @@ describe('getPalette_chai-assert', function() {
     })
 
     afterEach(function(done){
-        writeContentFile(config)
+        writeContentFile(config, function () {});
         done()
     })
 
-    it('should throw an error if the result is not an array', function () {
-        writeContentFile({newKey: "new value"}, function(err, done){
+    it('should throw an error if the passed value is not an array', function (done) {
+        writeContentFile([{newKey: "new value"}], function(result){
             function fetch() {
                 return "not an array";
             }
 
-            assert.throws( palette(fetch), 'is not an array' )
-            done()
-        })
+            if(result.type === 'error') {
+                assert.throws( palette(fetch), err.message );
+            }
+
+            done();
+        });
     })
 
-    it('should return an array with '+arrayLength+' items by default', function () {
-        assert.isArray(palette(), 'did not return an array')
-        assert.lengthOf(palette(), arrayLength, 'array length is not '+arrayLength)
+    it('should return an array with ' + arrayLength + ' items by default', function (done) {
+        assert.isArray(palette(), 'did not return an array');
+        assert.lengthOf(palette(), arrayLength, 'array length is not ' + arrayLength);
+        done();
     })
-})
+});

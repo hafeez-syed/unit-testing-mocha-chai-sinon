@@ -7,7 +7,7 @@ var hex2rgb = require('../includes/hex2rgb')
     , sinon = require('sinon');
 
 
-describe('hex2rgb_chai-expect', function() {
+xdescribe('hex2rgb_chai-expect', function() {
 
     describe('convert method', function () {
 

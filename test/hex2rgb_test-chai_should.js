@@ -24,7 +24,7 @@ describe('hex2rgb_chai-should', function() {
         });
     })
 
-    it.skip("should return rgb if passed an rgb value", function(done) {
+    /*it.skip("should return rgb if passed an rgb value", function(done) {
 
-    })
+    });*/
 })

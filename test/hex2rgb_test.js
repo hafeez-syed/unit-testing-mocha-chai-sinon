@@ -4,10 +4,14 @@ var hex2rgb = require('../includes/hex2rgb')
     , hex2rgb2 = require('../includes/hex2rgb2')
     , assert = require('assert');
 
-describe('hex2rgb_node', function() {
+xdescribe('hex2rgb_node', function() {
 
     it("should throw an error if the value is not an hex code", function(done) {
         hex2rgb2.convert("blue", function(error, result){
+            console.log('error');
+            console.log(error);
+            console.log('result');
+            console.log(result);
             assert(error);
             done();
         });

@@ -16,7 +16,7 @@ module.exports = {
                 values = this.arrayify(hex);
                 func = this.parse;
             } else {
-                console.log('NUMBEERSSSSSS');
+                //console.log('NUMBEERSSSSSS');
                 func = this.arrayItems;
             }
 

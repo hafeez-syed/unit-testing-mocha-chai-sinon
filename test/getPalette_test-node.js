@@ -7,39 +7,53 @@ var palette = require('../modules/palette')
 , configFile = configFilePath + 'colorPalette.json'
 , jsonContentFile = configFilePath + 'jsonContent.json'
 , writeContentFile = function(config, callback) {
-    fs.writeFile(jsonContentFile, JSON.stringify(config))
-  }
+    if(Array.isArray(config)) {
+        fs.writeFile(jsonContentFile, JSON.stringify(config), function (err) {
+            if(err) {
+                callback({type: 'error', 'message': err.message});
+            }
+
+            callback({type: 'success', 'message': 'The file has been saved!'});
+        });
+    } else {
+        callback({type: 'error', 'message': 'Value passed is not an array'});
+    }
+};
 
 describe('getPalette_node', function() {
 
-    var config = {}
+    var config = {};
 
     before(function(done){
 
         fs.readFile(configFile, function (err, contents) {
-            config = JSON.parse(contents.toString())
-            done()
-        })
-    })
+            config = JSON.parse(contents.toString());
+            done();
+        });
+    });
 
     afterEach(function(done){
-        writeContentFile(config)
-        done()
-    })
+        writeContentFile(config, function () {});
+        done();
+    });
 
-    it('should throw an error if the result is not an array', function () {
-        writeContentFile({newKey: "new value"}, function(err, done){
+    it('should throw an error if the passed value is not an array', function (done) {
+        writeContentFile([{newKey: "new value"}], function(result){
             function fetch() {
                 return "not an array";
             }
 
-            assert.throws( palette(fetch), 'is not an array' )
-            done()
-        })
-    })
+            if(result.type === 'error') {
+                assert.throws( palette(fetch), err.message );
+            }
 
-    it('should return an array with '+arrayLength+' items by default', function () {
-        assert(Array.isArray(palette()), 'did not return an array')
-        assert.equal(palette().length, arrayLength, 'array length is not '+arrayLength)
-    })
-})
+            done();
+        });
+    });
+
+    it('should return an array with ' + arrayLength +' items by default', function (done) {
+        assert(Array.isArray(palette()), 'did not return an array');
+        assert.equal(palette().length, arrayLength, 'array length is not ' + arrayLength);
+        done();
+    });
+});
