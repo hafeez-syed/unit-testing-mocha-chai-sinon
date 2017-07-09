@@ -20,7 +20,7 @@ var palette = require('../modules/palette')
     }
 };
 
-describe('getPalette_node', function() {
+xdescribe('getPalette_node', function() {
 
     var config = {};
 
